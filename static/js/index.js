@@ -85,23 +85,21 @@ class ProjectManager {
         
         return `
             <div class="project-card">
-                <div class="card-header">
+                <div class="card-content">
                     <div class="project-title">
                         <span class="label">项目名称：</span>
                         <span class="value">${project.name}</span>
                     </div>
-                </div>
-                <div class="project-info">
-                    <p class="port-info">
-                        <span class="label">端口号：</span>
-                        <span class="value">${portText}</span>
-                    </p>
-                    <p class="status-info">
-                        <span class="label">状态：</span>
-                        <span class="status-badge ${statusClass}">
-                            <i class="fas fa-circle"></i> ${statusText}
-                        </span>
-                    </p>
+                    <div class="project-info">
+                        <p class="info-item port-info">
+                            <span class="label">端口号：</span>
+                            <span class="value">${portText}</span>
+                        </p>
+                        <p class="info-item status-info">
+                            <span class="label">状态：</span>
+                            <span class="status-text ${statusClass}">${statusText}</span>
+                        </p>
+                    </div>
                 </div>
                 <div class="project-actions">
                     <button class="btn-action btn-start" onclick="projectManager.startProject('${project.name}')">
