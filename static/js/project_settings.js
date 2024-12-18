@@ -29,6 +29,7 @@ class ProjectSettings {
         document.getElementById('pythonVersion').value = config.python_version || '3.9';
         document.getElementById('startupFile').value = config.startup_file || '';
         document.getElementById('apiFile').value = config.api_file || '';
+        document.getElementById('downloadUrl').value = config.download_url || '';
     }
 
     async handleSubmit(e) {

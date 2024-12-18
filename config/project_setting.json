@@ -1,6 +1,10 @@
 [
   {
-    "name": "aaa"
+    "name": "aaa",
+    "conda_env": "aaa",
+    "python_version": "3.11",
+    "startup_file": "aaa",
+    "api_file": "bbb"
   },
   {
     "name": "bbb"
@@ -34,5 +38,12 @@
   },
   {
     "name": "vvv"
+  },
+  {
+    "name": "akshare",
+    "conda_env": "akshare",
+    "python_version": "3.11",
+    "startup_file": "C:\\computer\\3\\itproject\\manyaitools_modules\\akshare",
+    "api_file": "暂无"
   }
 ]
