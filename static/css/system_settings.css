@@ -142,4 +142,138 @@
 
 .btn-save i {
     font-size: 0.9rem;
+}
+
+.conda-env-group {
+    margin-top: 20px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.conda-command-display {
+    margin-top: 10px;
+    padding: 15px;
+    background: #2c3e50;
+    border-radius: 6px;
+    color: #fff;
+}
+
+.conda-command-display code {
+    display: block;
+    margin-bottom: 15px;
+    font-family: 'Courier New', monospace;
+    white-space: pre-wrap;
+}
+
+.command-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-action {
+    padding: 4px 8px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 11px;
+    font-weight: 500;
+    color: white;
+    background: #4a90e2;
+    transition: all 0.2s ease;
+    height: 22px;
+    white-space: nowrap;
+    min-width: 70px;
+    justify-content: center;
+}
+
+.btn-recommended {
+    background: #4CAF50;
+}
+
+.btn-action:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.btn-action i {
+    font-size: 11px;
+}
+
+.conda-commands {
+    margin-top: 15px;
+}
+
+.command-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+.command-row:last-child {
+    margin-bottom: 0;
+}
+
+.command-display {
+    width: 100%;
+}
+
+.command-display code {
+    display: block;
+    padding: 12px 15px;
+    background: #2c3e50;
+    color: #fff;
+    border-radius: 6px;
+    font-family: 'Monaco', 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.command-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 5px;
+}
+
+.btn-action {
+    padding: 4px 8px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 11px;
+    font-weight: 500;
+    color: white;
+    background: #4a90e2;
+    transition: all 0.2s ease;
+    height: 22px;
+    white-space: nowrap;
+    min-width: 70px;
+    justify-content: center;
+}
+
+.btn-recommended {
+    background: #4CAF50;
+}
+
+.btn-action:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.btn-action i {
+    font-size: 11px;
 } 
