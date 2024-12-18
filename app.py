@@ -145,5 +145,66 @@ def system_config():
                 'error': str(e)
             })
 
+@app.route('/project-settings')
+def project_settings():
+    project_name = request.args.get('name')
+    return render_template('project_settings.html', project_name=project_name)
+
+@app.route('/api/project_config', methods=['GET', 'POST'])
+def project_config():
+    config_file = os.path.join(os.path.dirname(__file__), 'config', 'project_setting.json')
+    
+    if request.method == 'GET':
+        try:
+            project_name = request.args.get('name')
+            if os.path.exists(config_file):
+                with open(config_file, 'r', encoding='utf-8') as f:
+                    projects = json.load(f)
+                    project = next((p for p in projects if p['name'] == project_name), None)
+                    if project:
+                        return jsonify({
+                            'success': True,
+                            'data': project
+                        })
+            return jsonify({
+                'success': True,
+                'data': {'name': project_name}
+            })
+        except Exception as e:
+            return jsonify({
+                'success': False,
+                'error': str(e)
+            })
+    
+    elif request.method == 'POST':
+        try:
+            data = request.get_json()
+            
+            if os.path.exists(config_file):
+                with open(config_file, 'r', encoding='utf-8') as f:
+                    projects = json.load(f)
+            else:
+                projects = []
+            
+            project_index = next((i for i, p in enumerate(projects) if p['name'] == data['name']), None)
+            if project_index is not None:
+                projects[project_index].update(data)
+            else:
+                projects.append(data)
+            
+            with open(config_file, 'w', encoding='utf-8') as f:
+                json.dump(projects, f, ensure_ascii=False, indent=2)
+            
+            return jsonify({
+                'success': True,
+                'message': '保存成功'
+            })
+            
+        except Exception as e:
+            return jsonify({
+                'success': False,
+                'error': str(e)
+            })
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=1000, debug=True) 

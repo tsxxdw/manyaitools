@@ -108,7 +108,7 @@ class ProjectManager {
                     <button class="btn-action btn-stop" onclick="projectManager.stopProject('${project.name}')">
                         <i class="fas fa-stop"></i> 停止
                     </button>
-                    <button class="btn-action btn-settings" onclick="window.location.href='/settings?project=${project.name}'">
+                    <button class="btn-action btn-settings" onclick="window.location.href='/project-settings?name=${project.name}'">
                         <i class="fas fa-cog"></i> 配置
                     </button>
                     <button class="btn-action btn-logs" onclick="projectManager.viewLogs('${project.name}')">
