@@ -89,19 +89,23 @@ body {
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 20px;
+    padding: 20px;
 }
 
 .project-card {
-    background: linear-gradient(145deg, #ffffff, #f5f5f5);
+    background: var(--card-background);
     border-radius: 12px;
-    padding: 16px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05),
-                -5px -5px 15px rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
     transition: all 0.3s ease;
-    width: 300px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 200px;
+    width: 240px;
+    margin: 10px;
 }
 
 .project-card:hover {
@@ -111,32 +115,26 @@ body {
 }
 
 .card-content {
-    padding-bottom: 12px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .project-title {
-    margin-bottom: 12px;
-    padding-bottom: 8px;
-
+    margin-bottom: 8px;
 }
 
-.label {
-    color: #888;
-    font-size: 0.85em;
-    font-weight: 500;
-}
-
-.value {
-    color: #444;
-    font-size: 0.9em;
-    font-weight: 500;
+.project-title .value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
 }
 
 .project-info {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
 .info-item {
@@ -144,72 +142,72 @@ body {
     align-items: center;
     gap: 8px;
     margin: 0;
+    font-size: 13px;
 }
 
-.status-badge {
-    padding: 3px 8px;
-    border-radius: 20px;
-    font-size: 0.85em;
+.label {
+    color: #666;
+    font-weight: normal;
+}
+
+.value {
+    color: #333;
     font-weight: 500;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
 }
 
-.status-running {
-    background: linear-gradient(145deg, #e3f2fd, #bbdefb);
-    color: #1565c0;
+.status-text.status-running {
+    color: #4caf50;
+}
+
+.status-text.status-stopped {
+    color: #f44336;
 }
 
 .project-actions {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    display: flex;
+    justify-content: space-between;
     margin-top: 15px;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
 }
 
 .btn-action {
-    padding: 8px 12px;
+    flex: 1;
+    padding: 6px 0;
+    border-radius: 4px;
     border: none;
-    border-radius: 8px;
-    font-size: 0.85em;
-    font-weight: 500;
     cursor: pointer;
+    font-size: 12px;
+    color: #666;
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 4px;
     transition: all 0.2s ease;
 }
 
-.btn-start {
-    background: linear-gradient(145deg, #e8f5e9, #c8e6c9);
-    color: #2e7d32;
-}
-
-.btn-stop {
-    background: linear-gradient(145deg, #ffebee, #ffcdd2);
-    color: #c62828;
-}
-
-.btn-settings {
-    background: linear-gradient(145deg, #e3f2fd, #bbdefb);
-    color: #1565c0;
-}
-
-.btn-logs {
-    background: linear-gradient(145deg, #f3e5f5, #e1bee7);
-    color: #6a1b9a;
-}
-
 .btn-action:hover {
-    transform: translateY(-1px);
-    filter: brightness(1.05);
+    color: #1976d2;
 }
 
-.btn-action:active {
-    transform: translateY(1px);
+.btn-action i {
+    font-size: 14px;
 }
+
+.btn-action:not(:last-child) {
+    border-right: 1px solid #eee;
+}
+
+.btn-start { color: #4caf50; }
+.btn-stop { color: #f44336; }
+.btn-settings { color: #1976d2; }
+.btn-logs { color: #757575; }
+
+.btn-start:hover { color: #2e7d32; }
+.btn-stop:hover { color: #c62828; }
+.btn-settings:hover { color: #1565c0; }
+.btn-logs:hover { color: #424242; }
 
 .no-projects {
     text-align: center;
