@@ -42,26 +42,49 @@ class ProjectSettings {
                 throw new Error('请先填写Conda环境名称');
             }
 
-            const data = {
-                conda_env: condaEnv,
-                python_version: pythonVersion,
-                source: source
-            };
+            // 获取对应的命令
+            const commandElement = document.getElementById(source === 'china' ? 'condaCommandChina' : 'condaCommandDefault');
+            const command = commandElement.textContent;
 
-            const response = await fetch('/api/execute_conda_command', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            });
-
+            // 检查操作系统类型
+            const response = await fetch('/api/check_platform');
             const result = await response.json();
-            
-            if (result.success) {
-                alert('conda环境创建成功！');
+
+            if (result.platform === 'windows') {
+                // Windows系统：复制命令并打开CMD
+                await navigator.clipboard.writeText(command);
+                alert('命令已复制到剪贴板！\n即将打开CMD窗口，请在窗口中右键粘贴命令执行。');
+                
+                // 通过后端打开CMD
+                await fetch('/api/open_cmd', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
             } else {
-                throw new Error(result.error || '创建失败');
+                // Linux系统：直接执行命令
+                const data = {
+                    conda_env: condaEnv,
+                    python_version: pythonVersion,
+                    source: source
+                };
+
+                const response = await fetch('/api/execute_conda_command', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('conda环境创建成功！');
+                } else {
+                    throw new Error(result.error || '创建失败');
+                }
             }
         } catch (error) {
             console.error('Error executing conda command:', error);

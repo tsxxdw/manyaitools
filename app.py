@@ -1,5 +1,7 @@
 import json
 import os
+import subprocess
+import platform
 from flask import Flask, render_template, jsonify, request
 
 app = Flask(__name__)
@@ -205,6 +207,82 @@ def project_config():
                 'success': False,
                 'error': str(e)
             })
+
+@app.route('/api/execute_conda_command', methods=['POST'])
+def execute_conda_command():
+    try:
+        data = request.get_json()
+        conda_env = data.get('conda_env')
+        python_version = data.get('python_version')
+        source = data.get('source')
+
+        if not all([conda_env, python_version, source]):
+            return jsonify({
+                'success': False,
+                'error': '缺少必要参数'
+            })
+
+        # 构建命令
+        if source == 'china':
+            command = f'conda create -n {conda_env} python={python_version} -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/ -y'
+        else:
+            command = f'conda create -n {conda_env} python={python_version} -y'
+
+        # 执行命令
+        process = subprocess.Popen(
+            command,
+            shell=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True
+        )
+        
+        stdout, stderr = process.communicate()
+
+        if process.returncode == 0:
+            return jsonify({
+                'success': True,
+                'message': '环境创建成功',
+                'output': stdout
+            })
+        else:
+            return jsonify({
+                'success': False,
+                'error': f'创建失败: {stderr}'
+            })
+
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        })
+
+@app.route('/api/check_platform')
+def check_platform():
+    return jsonify({
+        'platform': 'windows' if platform.system().lower() == 'windows' else 'linux'
+    })
+
+@app.route('/api/open_cmd', methods=['POST'])
+def open_cmd():
+    try:
+        if platform.system().lower() == 'windows':
+            # 打开新的CMD窗口
+            subprocess.Popen('start cmd', shell=True)
+            return jsonify({
+                'success': True,
+                'message': 'CMD窗口已打开'
+            })
+        else:
+            return jsonify({
+                'success': False,
+                'error': '不支持的操作系统'
+            })
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        })
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=1000, debug=True) 
