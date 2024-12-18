@@ -347,4 +347,29 @@ body {
 .status-stopped {
     color: #c62828;
 }
+
+.project-card.color-1 {
+    background: linear-gradient(145deg, #e8f5fe, #ffffff);
+    border-left: 4px solid #64b5f6;
+}
+
+.project-card.color-2 {
+    background: linear-gradient(145deg, #f5e6ff, #ffffff);
+    border-left: 4px solid #ba68c8;
+}
+
+.project-card.color-3 {
+    background: linear-gradient(145deg, #e8fdf5, #ffffff);
+    border-left: 4px solid #4db6ac;
+}
+
+.project-card.color-4 {
+    background: linear-gradient(145deg, #fff8e1, #ffffff);
+    border-left: 4px solid #ffd54f;
+}
+
+.project-card.color-5 {
+    background: linear-gradient(145deg, #ffebee, #ffffff);
+    border-left: 4px solid #ff8a80;
+}
  

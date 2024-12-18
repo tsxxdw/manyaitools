@@ -74,17 +74,18 @@ class ProjectManager {
             return;
         }
 
-        const projectsHtml = projects.map(project => this.renderProjectCard(project)).join('');
+        const projectsHtml = projects.map((project, index) => this.renderProjectCard(project, index)).join('');
         $('#projectList').html(projectsHtml);
     }
 
-    renderProjectCard(project) {
+    renderProjectCard(project, index) {
+        const colorIndex = (index % 5) + 1;
         const statusClass = project.status === 'running' ? 'status-running' : 'status-stopped';
         const statusText = project.status === 'running' ? '运行中' : '已停止';
         const portText = project.port ? project.port : '0.0.0.0';
         
         return `
-            <div class="project-card">
+            <div class="project-card color-${colorIndex}">
                 <div class="card-content">
                     <div class="project-title">
                         <span class="label">项目名称：</span>
