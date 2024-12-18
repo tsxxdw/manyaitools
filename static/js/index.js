@@ -38,14 +38,14 @@ class ProjectManager {
                 const result = await response.json();
                 
                 if (result.success) {
-                    alert('卡片创建成功！');
+                    this.showToast('卡片创建成功！');
                     this.closeModal();
                     this.loadProjects();
                 } else {
-                    throw new Error(result.error || '保存失败');
+                    this.showToast(result.error || '保存失败', 'error');
                 }
             } catch (error) {
-                alert('保存失败: ' + error.message);
+                this.showToast('保存失败: ' + error.message, 'error');
             }
         });
     }
@@ -136,6 +136,31 @@ class ProjectManager {
                 <p>错误：${message}</p>
             </div>
         `);
+    }
+
+    showToast(message, type = 'success') {
+        // 移除现有的提示框
+        $('.toast-notification').remove();
+        
+        // 创建新的提示框
+        const toast = $(`
+            <div class="toast-notification ${type}">
+                <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+                <span>${message}</span>
+            </div>
+        `);
+        
+        // 添加到页面
+        $('body').append(toast);
+        
+        // 触发动画
+        setTimeout(() => toast.addClass('show'), 100);
+        
+        // 3秒后消失
+        setTimeout(() => {
+            toast.removeClass('show');
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
     }
 }
 

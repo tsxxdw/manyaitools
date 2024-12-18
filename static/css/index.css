@@ -372,4 +372,39 @@ body {
     background: linear-gradient(145deg, #ffebee, #ffffff);
     border-left: 4px solid #ff8a80;
 }
+
+.toast-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #4CAF50;
+    color: white;
+    padding: 16px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease;
+}
+
+.toast-notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.toast-notification i {
+    font-size: 20px;
+}
+
+.toast-notification.success {
+    background: #4CAF50;
+}
+
+.toast-notification.error {
+    background: #f44336;
+}
  
